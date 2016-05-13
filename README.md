@@ -1,14 +1,20 @@
-# Summative Task
+# Rock Cycle Game
 
 ## Overall goal
 
-My summative task will be a combination software and hardware product.
+My summative task will use processing and vectors to simulate the rock cycle.
 
-I will program a sensor attached to an Arduino board. The sensor will be able to detect how hard a person is blowing air toward it (perhaps a pressure sensor? a mic?).
+I will create different stages of a game in which the user is a rock going through the rock cycle.  
 
-When a person blows on the sensor, this information is transmitted to a Processing sketch.
+When a user completes the rock cycle, the game will be completed, however they can repeat the levels, since the rock cycle is infinte.
 
-In the sketch, a visual representation of a "ripe" dandelion will be shown.  The dandelion seeds will disperse on screen in the sketch, simulating the physics of the motion of real dandelion seeds, when someone blows them off the stem in real life.
+The different stages of the game will represent the different major stages in the rock cycle, interluded by short descriptions of what will happen in the next stage.
+* Magma <------------
+* Igneous Rock      |
+* Sediment          |
+* Sedimentary Rock  |
+* Metamorphic Rock  |
+* Magma ------------>
 
 ## Sub-goals
 
