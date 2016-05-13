@@ -18,10 +18,9 @@ The different stages of the game will represent the different major stages in th
 
 ## Sub-goals
 
-* extend Motion class (that we developed earlier together) to allow for force accumulation (wind, gravity, other forces)
-* make the mouse movement translate to a wind force
-* make it so that moving the mouse causes the "seeds" of the dandelion to disperse
-* modify the visual representation of the Motion class to more closely resembly dandelion seeds
-* identify an Arduino sensor that might work to detect air pressure / volume
-* program sensor to send values to Processing sketch
-* translate sensor output to wind force in sketch
+* extend Motion class (that we developed earlier together) to allow for the user to move and change velocity and acceleration with arrow keys
+* Create "Magma" level in which the user tries to escape the convection currents, in order to become igneous rock
+* Create "Igneous" level, in which the user tries to get "hit" by water droplets, in order to become sediment.
+* Create "Sediment" level in which the user tries to avoid water flows, in order to be slowly cemented into sedementary rock
+* Create "metamorphic" level in which the user tries to reach the magma flow, in order to turn back into magma, and start the rock cycle again.
+* Figure out how to display text and information, and create a transition system between levels
