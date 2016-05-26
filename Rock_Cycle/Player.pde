@@ -32,20 +32,32 @@ class Player {
     velocity = new RVector(0, 0);
     acceleration = new RVector(0, 0);
   }
+  //Check to see if the user is dead
+  boolean dead(ArrayList<Integer[]> lossConditions) {
+    boolean dead = false;
+    for (Integer[] rectangle : lossConditions) {
+      for (int i=0; i<360; i+=36) {
+        RVector point = new RVector(location.x, location.y);
+        point.x = point.x + (cos(i)*12.5);
+        point.y = point.y + (sin(i)*12.5);
+        if (checkCollision(rectangle, point)) {
+          dead = true;
+        }
+      }
+    }
 
-  boolean dead() {
-
-
-
-    return false;
+    if (dead) return true;
+    else return false;
   }
-
+  boolean level1Victory() {
+    
+  }
   void update(ArrayList<Integer[]> lossConditions) {
 
-    if (!dead()) {
+    if (!dead(lossConditions)) {
       checkEdges();
       velocity = velocity.add(velocity, acceleration);
-      RVector randomVelocity = new RVector(random(1), random(1));
+      RVector randomVelocity = new RVector(random(-0.5, 0.5), random(-0.5, 0.5));
       location = location.add(location, randomVelocity);
       location = location.add(location, velocity);
 
@@ -55,6 +67,11 @@ class Player {
         rect(rectangle[0], rectangle[1], rectangle[2], rectangle[3]);
       }
       ellipse(location.x, location.y, 25, 25);
+    } else {
+      location.x = 50;
+      location.y = 50;
+      velocity.x = 0;
+      velocity.y = 0;
     }
   }
 
@@ -73,5 +90,11 @@ class Player {
       velocity.y = velocity.y*-0.75;
       location.y = 5;
     }
+  }
+
+  boolean checkCollision(Integer[] rectangle, RVector point) {
+    if (point.x>rectangle[0] && point.x<(rectangle[0]+rectangle[2]) && point.y > rectangle[1] && point.y<(rectangle[1]+rectangle[3])) {
+      return true;
+    } else return false;
   }
 }
