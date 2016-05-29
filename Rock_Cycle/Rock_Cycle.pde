@@ -9,6 +9,10 @@ Player player;
 Absorber absorber;
 Integer[] dropletPositions;
 Integer yPosition;
+Integer[] currentXPositions;
+Integer[] currentYPositions;
+Integer[] currentHeights;
+Integer[] currentWidths;
 void setup() {
   //window size, background color, first level is level '0' , using the font 'sans serif' with size 30
   size(900, 600);
@@ -20,6 +24,9 @@ void setup() {
   absorber = new Absorber();
   Integer[] randomPositions = {Math.round(random(50, width-50)), Math.round(random(50, width-50)), Math.round(random(50, width-50))};
   this.dropletPositions = randomPositions;
+  
+  RVector[] currentPositions = {};
+  RVector[] currentAccelerations = {};
   yPosition = 0;
 }
 void draw() { 
@@ -35,8 +42,10 @@ void draw() {
     level2Message();
   } else if (level == 3) {
     igneousLevel();
-  } else if(level == 4){
-  startMessage();
+  } else if (level == 4) {
+    level3Message();
+  } else if (level == 5){
+    metamorphicLevel();
   }
 
   upPressed = false;
@@ -45,7 +54,42 @@ void draw() {
   downPressed = true;
 }
 
+void metamorphicLevel(){
+  background(161, 40, 48);
+  ArrayList<Integer[]> lossConditions = new ArrayList<Integer[]>();
+  Integer[] firstRect = {currentXPositions[0], currentYPositions[0], currentHeights[0], currentWidths[0]};
+  Integer[] secondRect = {currentXPositions[1], currentYPositions[1], currentHeights[1], currentWidths[1]};
+  Integer[] thirdRect = {currentXPositions[2], currentYPositions[2], currentHeights[2], currentWidths[2]};
+  lossConditions.add(firstRect);
+  lossConditions.add(secondRect);
+  lossConditions.add(thirdRect);
+  //test words
+
+  player.update(lossConditions);
+  
+  for(int i = 0;i<currentXPositions.length;i++){
+    currentXPositions[i] = currentXPositions[i]+Math.round(random(-20,10));
+    currentYPositions[i] = currentYPositions[i]+Math.round(random(-20,10));
+  }
+
+}
+
+void level3Message() {
+  //center text, and display.
+  textAlign(CENTER, CENTER);
+  textSize(30);
+  fill(0, 0, 80);
+  textFont(font);
+  text("Your goal is to avoid being hit by water \n currents, which will cause you to wash away \n and become sediment again \n\n Press 'shift' to begin your journey \nas a piece of metamorphic rock \n\n Controls: arrow keys", width/2, height/2);
+  if (nextLevel) {
+    level = 5;
+    nextLevel = false;
+    player.restart();
+  }
+}
+
 void igneousLevel() {
+  background(174, 234, 255);
   ArrayList<Integer[]> lossConditions = new ArrayList<Integer[]>();
   Integer[] first = {dropletPositions[0], yPosition};
   Integer[] second = {dropletPositions[1], yPosition};
@@ -54,6 +98,9 @@ void igneousLevel() {
   lossConditions.add(first);
   lossConditions.add(second);
   lossConditions.add(third);
+
+
+
   absorber.update(lossConditions);
   if (absorber.completed()) {
     level=4;

@@ -5,12 +5,14 @@ class Absorber {
   RVector acceleration;
   boolean dead;
   int totalCollected;
+  int dropletAbsorbed;
 
   Absorber() {
     location = new RVector(50, height-50);
     velocity = new RVector(0, 0);
     acceleration = new RVector(0, 0);
     totalCollected = 0;
+    dropletAbsorbed = 3;
   }
 
   void moveLeft() {
@@ -51,6 +53,7 @@ class Absorber {
 
   boolean checkAbsorption(ArrayList<Integer[]> dropletLocations) {
     boolean result = false;
+    int counter = 0;
     for (Integer[] droplet : dropletLocations) {
       Integer[] dropletLocation = {Math.round(droplet[0]-10.6), Math.round(droplet[1]-10.6), 15, 15};
       for (int i=0; i<360; i+=36) {
@@ -59,8 +62,10 @@ class Absorber {
         point.y = point.y + (sin(i)*12.5);
         if (checkCollision(dropletLocation, point)) {
           result =  true;
+          dropletAbsorbed = counter;
         }
       }
+      counter++;
     }
     return result;
   }
