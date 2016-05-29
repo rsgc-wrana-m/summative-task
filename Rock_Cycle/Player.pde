@@ -4,6 +4,7 @@ class Player {
   RVector velocity;
   RVector acceleration;
   boolean dead;
+  int totalCollected;
 
   Player() {
     location = new RVector(30, 30);
@@ -28,7 +29,7 @@ class Player {
   }
 
   void restart() {
-
+    location = new RVector(50,50);
     velocity = new RVector(0, 0);
     acceleration = new RVector(0, 0);
   }
@@ -49,15 +50,17 @@ class Player {
     if (dead) return true;
     else return false;
   }
-  boolean level1Victory() {
-    
+  boolean level1Victory(Integer[] winZone) {
+    if (checkCollision(winZone, location)) {
+      return true;
+    } else return false;
   }
   void update(ArrayList<Integer[]> lossConditions) {
 
     if (!dead(lossConditions)) {
       checkEdges();
       velocity = velocity.add(velocity, acceleration);
-      RVector randomVelocity = new RVector(random(-0.5, 0.5), random(-0.5, 0.5));
+      RVector randomVelocity = new RVector(random(-1, 1), random(-1, 1));
       location = location.add(location, randomVelocity);
       location = location.add(location, velocity);
 
@@ -68,10 +71,7 @@ class Player {
       }
       ellipse(location.x, location.y, 25, 25);
     } else {
-      location.x = 50;
-      location.y = 50;
-      velocity.x = 0;
-      velocity.y = 0;
+      restart();
     }
   }
 
