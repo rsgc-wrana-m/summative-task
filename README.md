@@ -79,17 +79,54 @@ None, all controls are given within the program.
 **What is the most important algorithm, or algorithm(s), in your program?
 That is, where is the "core idea" of your program?**
 
-The core idea of my program is to create a game where the user interacts with the objects within their world.  I also wanted to do it in such a way where the level design can be changed with a minimal amount of additional coding.
+The core idea of my program is to create a game where the user interacts with the objects within their world.  I also wanted to do it in such a way where the level design can be changed with a minimal amount of additional coding.  Based on this, the most important sections of code are the ```update``` methods in ```Player``` and ```Absorber```
+
+```
+  void update(ArrayList<Integer[]> lossConditions) {
+    //If the player is not dead(based on the conditions provided in the main method), move them according to what they pressed
+    if (!dead(lossConditions)) {
+      checkEdges();
+      velocity = velocity.add(velocity, acceleration);
+      RVector randomVelocity = new RVector(random(-1, 1), random(-1, 1));
+      location = location.add(location, randomVelocity);
+      location = location.add(location, velocity);
 
 
+      fill(175);
+      //draw each rectangle in the canvas, based on the parameters provided in the main method
+      for (Integer[] rectangle : lossConditions) {
+        rect(rectangle[0], rectangle[1], rectangle[2], rectangle[3]);
+      }
+      //draw the player
+      ellipse(location.x, location.y, 25, 25);
+    } else {
+      //if the player is dead, restart
+      restart();
+    }
+  }
+```
+**Explain how this works.**
 
-Explain how this works.
-How have you made your program easy to use?
-How have you made correct use of source control?
-For example, show that you have:
-made frequent commits
-kept commits "atomic" (i.e.: one accomplishment per commit, rather than a batch of things all committed at once)
-descriptive commit messages
+This method works by altering the player's velocity and position and acceleration functions, as well as drawing the rectangles which it has been passed, and checking to see if the player has collided with a rectangle.  Additionally, it resets the player when they collide with a rectangle.
+
+**How have you made your program easy to use?**
+
+From the perspective of the user, everything that needs to be done (i.e. pushing buttons) is told to the user before they start a level.
+
+**How have you made correct use of source control?**
+**For example, show that you have**
+**made frequent commits:**
+
+Commits made on May 13th are relatively frequent
+
+**kept commits "atomic" (i.e.: one accomplishment per commit, rather than a batch of things all committed at once):**
+
+d103dc63c22942c9ddf06a0c80ec826480127216  This commit only focuses on commenting what has already been written, and deleting one or two unnecessary lines.
+
+**descriptive commit messages:**
+
+3c6d4e4fad5ba427f624977d8a3b33a4672ee876  This commit provides a simple overall description of what was done, but also provides a more specfic description as to what exactly was done.
+
 
 
 ## Sub-goals
