@@ -135,7 +135,6 @@ d103dc63c22942c9ddf06a0c80ec826480127216  This commit only focuses on commenting
 * Create "Magma" level in which the user tries to escape the convection currents, in order to become igneous rock
 * Create "Igneous" level, in which the user tries to get "hit" by water droplets, in order to become sediment.
 * Create "Sediment" level in which the user tries to avoid water flows, in order to be slowly cemented into sedementary rock
-* Create "metamorphic" level in which the user tries to reach the magma flow, in order to turn back into magma, and start the rock cycle again.
 * Figure out how to display text and information, and create a transition system between levels
 
 
